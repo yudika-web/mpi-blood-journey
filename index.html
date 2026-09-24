@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0B5BA8">
+  <meta name="description" content="MPI IPA kelas VIII: Blood Journey — Sistem Transportasi/Peredaran Darah Manusia">
+  <title>Blood Journey — MPI IPA Kelas VIII</title>
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body class="bg-opening">
+  <div id="app" class="app-shell">
+    <header class="topbar" id="topbar">
+      <button class="icon-button" id="menuBtn" type="button" aria-label="Buka peta menu">
+        <img src="assets/icons/navigation/menu.webp" alt="">
+      </button>
+      <div class="topbar-center">
+        <div class="eyebrow" id="stageLabel">Blood Journey</div>
+        <div class="progress-row">
+          <div class="progress-track" aria-label="Progres belajar"><div class="progress-fill" id="progressFill"></div></div>
+          <span id="progressText">0%</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="sound-button" id="soundToggleBtn" type="button" aria-label="Aktifkan atau matikan suara" aria-pressed="true">🔊</button>
+        <button class="teacher-button" id="teacherBtn" type="button" aria-label="Buka informasi rekap guru" title="Rekap Guru">👩‍🏫</button>
+        <button class="reset-button" id="resetBtn" type="button" aria-label="Mulai ulang">↻</button>
+      </div>
+    </header>
+
+    <main id="screen" class="screen" tabindex="-1" aria-live="polite"></main>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi halaman">
+      <button class="nav-button secondary" id="backBtn" type="button">
+        <img src="assets/icons/navigation/back.webp" alt=""><span>Kembali</span>
+      </button>
+      <button class="nav-button primary" id="nextBtn" type="button">
+        <span>Lanjut</span><img src="assets/icons/navigation/next.webp" alt="">
+      </button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop hidden" id="menuModal" role="presentation">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+      <div class="modal-head">
+        <div><div class="eyebrow">Akses bertahap</div><h2 id="menuTitle">Peta Ekspedisi</h2></div>
+        <button class="close-button" id="closeMenuBtn" type="button" aria-label="Tutup">×</button>
+      </div>
+      <div class="stage-grid" id="stageGrid"></div>
+      <p class="modal-note">Tahap berikutnya terbuka setelah tahap sebelumnya selesai. Tahap yang sudah terbuka boleh dikunjungi kembali.</p>
+    </section>
+  </div>
+
+
+  <div class="image-zoom-modal hidden" id="imageZoomModal" role="dialog" aria-modal="true" aria-label="Perbesar gambar materi">
+    <div class="zoom-toolbar">
+      <button id="zoomOutBtn" type="button" aria-label="Perkecil">−</button>
+      <span id="zoomLevel">100%</span>
+      <button id="zoomInBtn" type="button" aria-label="Perbesar">+</button>
+      <button id="zoomResetBtn" type="button">Reset</button>
+      <button id="zoomCloseBtn" type="button" class="zoom-close" aria-label="Tutup">×</button>
+    </div>
+    <div class="zoom-viewport"><img id="zoomImage" alt=""></div>
+    <div class="zoom-caption" id="zoomCaption"></div>
+  </div>
+
+
+  <div class="modal-backdrop hidden" id="leaderboardModal" role="presentation">
+    <section class="modal leaderboard-modal" role="dialog" aria-modal="true" aria-labelledby="leaderboardTitle">
+      <div class="modal-head">
+        <div><div class="eyebrow">Peringkat kelas</div><h2 id="leaderboardTitle">Leaderboard Evaluasi</h2></div>
+        <button class="close-button" id="closeLeaderboardBtn" type="button" aria-label="Tutup">×</button>
+      </div>
+      <div id="leaderboardContent" class="backend-panel"><p class="note">Memuat leaderboard…</p></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop hidden" id="teacherModal" role="presentation">
+    <section class="modal teacher-modal" role="dialog" aria-modal="true" aria-labelledby="teacherTitle">
+      <div class="modal-head">
+        <div><div class="eyebrow">Rekap guru</div><h2 id="teacherTitle">Google Sheet Guru</h2></div>
+        <button class="close-button" id="closeTeacherBtn" type="button" aria-label="Tutup">×</button>
+      </div>
+      <div id="teacherContent" class="backend-panel"><p class="note">Memuat panel guru…</p></div>
+    </section>
+  </div>
+
+  <audio id="bgmAudio" src="assets/audio/steady_movement.mp3" loop preload="metadata"></audio>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/backend.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
