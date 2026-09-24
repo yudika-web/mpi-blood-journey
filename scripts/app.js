@@ -258,11 +258,10 @@
   }
 
   function renderIdentity(){
-    return `<div class="section-title"><div class="kicker">Personalisasi opsional</div><h1>Siapa penjelajah hari ini?</h1><p>Nama dan kelas digunakan untuk personalisasi. Jika Google Apps Script dikonfigurasi, identitas juga dipakai untuk rekap hasil di Google Sheets dan leaderboard; Canva Sheet tetap tidak digunakan.</p></div>
+    return `<div class="section-title"><div class="kicker">Personalisasi opsional</div><h1>Siapa penjelajah hari ini?</h1></div>
       <section class="card identity-form">
         <div class="field"><label for="nameInput">Nama panggilan</label><input id="nameInput" maxlength="30" value="${esc(state.name)}" placeholder="Contoh: Alya"></div>
         <div class="field"><label for="classInput">Kelas</label><select id="classInput"><option value="">Lewati / tidak diisi</option><option ${state.className==='8A'?'selected':''}>8A</option><option ${state.className==='8B'?'selected':''}>8B</option></select></div>
-        <div class="science-note">🔒 Canva Sheet tidak digunakan. Saat Google Sheets aktif, nama, kelas, nilai, kategori, percobaan, breakdown evaluasi, dan waktu akan direkap di Google Sheet guru.</div>
       </section>`;
   }
 
