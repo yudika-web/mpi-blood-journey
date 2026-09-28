@@ -401,16 +401,16 @@
   const systemicOrder=['Ventrikel kiri','Aorta / arteri','Jaringan tubuh','Vena kava','Atrium kanan'];
 
   const simSteps = [
-    {short:'1', title:'Ventrikel kanan', text:'Perjalanan dimulai ketika ventrikel kanan berkontraksi dan mendorong darah yang miskin oksigen keluar dari jantung.', dir:'right', x:55, y:28, route:'pulmonary'},
-    {short:'2', title:'Arteri pulmonalis', text:'Darah bergerak melalui arteri pulmonalis menuju paru-paru. Ini adalah arteri yang membawa darah miskin oksigen.', dir:'up', x:61, y:24, route:'pulmonary'},
-    {short:'3', title:'Kapiler paru-paru', text:'Di kapiler sekitar alveolus, darah melepaskan karbon dioksida dan mengambil oksigen dari udara di paru-paru.', dir:'left', x:68, y:18, route:'pulmonary'},
-    {short:'4', title:'Vena pulmonalis', text:'Setelah kaya oksigen, darah kembali ke jantung melalui vena pulmonalis.', dir:'left', x:46, y:21, route:'pulmonary'},
-    {short:'5', title:'Atrium kiri', text:'Darah kaya oksigen masuk ke atrium kiri sebagai ruang penerima dari paru-paru.', dir:'down', x:49, y:26, route:'pulmonary'},
-    {short:'6', title:'Ventrikel kiri', text:'Darah diteruskan ke ventrikel kiri yang berdinding lebih tebal karena harus memompa ke seluruh tubuh.', dir:'down', x:50, y:31, route:'systemic'},
-    {short:'7', title:'Aorta', text:'Ventrikel kiri memompa darah ke aorta, arteri besar yang menyalurkan darah ke seluruh tubuh.', dir:'down', x:54, y:39, route:'systemic'},
-    {short:'8', title:'Arteri ke organ tubuh', text:'Darah kaya oksigen mengalir melalui arteri menuju organ-organ, otot, otak, ginjal, dan jaringan lain.', dir:'right', x:68, y:52, route:'systemic'},
-    {short:'9', title:'Kapiler jaringan', text:'Di kapiler jaringan, oksigen dan nutrien berpindah ke sel, sedangkan karbon dioksida serta zat sisa masuk ke darah.', dir:'left', x:72, y:68, route:'systemic'},
-    {short:'10', title:'Vena kava', text:'Darah yang kini miskin oksigen kembali melalui vena-vena besar dan bermuara ke vena kava untuk masuk lagi ke atrium kanan.', dir:'up', x:46, y:42, route:'systemic'}
+    {short:'1', title:'Ventrikel kanan', text:'Perjalanan dimulai ketika ventrikel kanan berkontraksi dan mendorong darah yang miskin oksigen keluar dari jantung.', dir:'up', x:35, y:73, img:'pulmonary_circulation', route:'pulmonary'},
+    {short:'2', title:'Arteri pulmonalis', text:'Darah bergerak melalui arteri pulmonalis menuju paru-paru. Ini adalah arteri yang membawa darah miskin oksigen.', dir:'right', x:42, y:32, img:'pulmonary_circulation', route:'pulmonary'},
+    {short:'3', title:'Kapiler paru-paru', text:'Di kapiler sekitar alveolus, darah melepaskan karbon dioksida dan mengambil oksigen dari udara di paru-paru.', dir:'right', x:88, y:29, img:'pulmonary_circulation', route:'pulmonary'},
+    {short:'4', title:'Vena pulmonalis', text:'Setelah kaya oksigen, darah kembali ke jantung melalui vena pulmonalis.', dir:'left', x:61, y:45, img:'pulmonary_circulation', route:'pulmonary'},
+    {short:'5', title:'Atrium kiri', text:'Darah kaya oksigen masuk ke atrium kiri sebagai ruang penerima dari paru-paru.', dir:'down', x:50, y:55, img:'pulmonary_circulation', route:'pulmonary'},
+    {short:'6', title:'Ventrikel kiri', text:'Darah diteruskan ke ventrikel kiri yang berdinding lebih tebal karena harus memompa ke seluruh tubuh.', dir:'up', x:37, y:59, img:'systemic_circulation', route:'systemic'},
+    {short:'7', title:'Aorta', text:'Ventrikel kiri memompa darah ke aorta, arteri besar yang menyalurkan darah ke seluruh tubuh.', dir:'right', x:35, y:23, img:'systemic_circulation', route:'systemic'},
+    {short:'8', title:'Arteri ke organ tubuh', text:'Darah kaya oksigen mengalir melalui arteri menuju organ-organ, otot, otak, ginjal, dan jaringan lain.', dir:'right', x:67, y:31, img:'systemic_circulation', route:'systemic'},
+    {short:'9', title:'Kapiler jaringan', text:'Di kapiler jaringan, oksigen dan nutrien berpindah ke sel, sedangkan karbon dioksida serta zat sisa masuk ke darah.', dir:'down', x:71, y:56, img:'systemic_circulation', route:'systemic'},
+    {short:'10', title:'Vena kava', text:'Darah yang kini miskin oksigen kembali melalui vena-vena besar dan bermuara ke vena kava untuk masuk lagi ke atrium kanan.', dir:'down', x:21, y:18, img:'systemic_circulation', route:'systemic'}
   ];
   const simModeMap = { full:[0,1,2,3,4,5,6,7,8,9], pulmonary:[0,1,2,3,4], systemic:[5,6,7,8,9] };
   const simModeLabel = { full:'Siklus penuh', pulmonary:'Pulmonal', systemic:'Sistemik' };
@@ -914,10 +914,12 @@
     const step = current.step;
     return `<div class="card sim2d-card">
       <div class="sim2d-stage">
-        <img src="${ASSET.science}circulation_body_map.webp" alt="Diagram 2D anatomi jantung dan pembuluh darah utama manusia">
-        <div class="sim-pulse" style="left:${step.x}%; top:${step.y}%"></div>
-        <div class="sim-arrow dir-${step.dir}" style="left:${step.x}%; top:${step.y}%">➜</div>
-        <div class="sim-label" style="left:${Math.min(74, step.x + 4)}%; top:${Math.max(6, step.y - 4)}%">${step.short}</div>
+        <div class="sim2d-canvas">
+          <img src="${ASSET.science}${step.img}.webp" alt="${step.route==='pulmonary'?'Diagram peredaran darah kecil: ventrikel kanan, arteri pulmonalis, paru-paru, vena pulmonalis, atrium kiri':'Diagram peredaran darah besar: ventrikel kiri, aorta, jaringan tubuh, vena kava, atrium kanan'}">
+          <div class="sim-pulse" style="left:${step.x}%; top:${step.y}%"></div>
+          <div class="sim-arrow dir-${step.dir}" style="left:${step.x}%; top:${step.y}%">➜</div>
+          <div class="sim-label" style="left:${Math.min(92, step.x + 4)}%; top:${Math.max(6, step.y - 6)}%">${step.short}</div>
+        </div>
       </div>
       <div class="sim2d-panel">
         <div class="sim-toolbar"><div class="sim-step-badge">${simModeLabel[state.sim.mode || 'full']} • Langkah ${current.pos+1}/${current.total}</div><button class="ghost-action mini-toggle" id="simResetBtn">Reset</button></div>
